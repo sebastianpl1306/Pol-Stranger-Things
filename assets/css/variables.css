@@ -1,0 +1,15 @@
+:root {
+    --color-green: #073e1e;
+    --color-blue: #3a5fe5;
+    --color-red: #ff1515;
+    --color-brown: #1e0707;
+    --color-dark-blue: #1e193c;
+    --fuente-titulos: "BenguiatStd-Bold";
+    --fuente-parrafos: Arial;
+}
+
+@font-face{
+    font-family: BenguiatStd-Bold;
+    font-style: hollow;
+    src: url(../fonts/BenguiatStd-Bold.otf);
+}

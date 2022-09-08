@@ -1,0 +1,47 @@
+@import url('./variables.css');
+
+body{
+    background-color: var(--color-brown) !important;
+}
+
+.container-image-main{
+    background-image: url('../images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 80vh;
+    position: relative;
+    z-index: 0;
+}
+
+.container-image-main::before{
+    content: "";
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.439);
+    width: 100%;
+    height: 80vh;
+    z-index: -1;
+}
+
+.container-image-main h1{
+    -webkit-text-stroke: 2px #FF1515;
+    color: transparent; 
+    font-family: BenguiatStd-Bold;
+    font-size: 7rem;
+    -webkit-text-shadow:0px 0px 105px 45px rgba(255,21,21,0.9);
+    -moz-text-shadow: 0px 0px 105px 45px rgba(255,21,21,0.9);
+    text-shadow: rgba(255,21,21,0.9) 0px 0px 39px;
+}
+
+@font-face{
+    font-family: BenguiatStd-Bold;
+    font-style: hollow;
+    src: url(../fonts/BenguiatStd-Bold.otf);
+}
+
+.container-video-trailer{
+    width: 100%;
+    height: 90vh;
+    display: block;
+}
