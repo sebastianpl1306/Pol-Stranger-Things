@@ -1,5 +1,8 @@
 <?php
   session_start();
+  if(!isset($_SESSION["rol"]) && $_SESSION["rol"] != "ADMIN"){
+    header('Location: '."../views/personajes.php"."?mensaje=No tiene permiso para acceder a esta url");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +31,7 @@
                     <a class="nav-link active" aria-current="page" href="personajes.php">Personajes</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="mounstros.php">Mounstros</a>
+                    <a class="nav-link active" aria-current="page" href="personajes.php">Mounstros</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Info Serie</a>
@@ -37,7 +40,7 @@
                 <form class="d-flex">
                   <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "VISITANT" || $_SESSION["rol"] == "ADMIN")){?>
                     <h6 class="text-light me-2"><?php echo $_SESSION["nombre"];?></h6>
-                    <a class="btn btn-light btn-sm" aria-current="page" href="../controllers/cerrar_sesion.php?SID=<?php echo $_SESSION["idSession"];?>">SALIR</a>
+                    <a class="btn btn-light btn-sm" aria-current="page" href="controllers/cerrar_sesion.php?SID=<?php echo $_SESSION["idSession"];?>">SALIR</a>
                   <?php }else{ ?>
                     <a class="btn btn-primary me-2" aria-current="page" href="form-inicio-sesion.php">Iniciar Sesion</a>
                     <a class="btn btn-primary" aria-current="page" href="form-registro.php">Registrarme</a>
@@ -47,48 +50,54 @@
             </div>
         </nav>
     </header>
-    <main class="container-fluid container-image-main d-flex justify-content-center">
-        <div class="row text-center align-self-center">
-            <h1 class="">STRANGER <br>THINGS</h1><br>
-            <h2 class="text-light">INICIO</h2>
-        </div>
-    </main>
-    <section class="container text-light">
-        <h2>Lista de personajes</h2>
-        <article class="col-12 text-end">
-          <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "ADMIN")){ ?>
-            <a href="form-agregar-personaje.php" class="btn btn-light">Agregar Personaje</a>
-          <?php }?>
-        </article>
-        <?php
-          include_once __DIR__.'/../controllers/main.php';
-          $controller = new Controller();
-
-          foreach($controller->mostrar_actores() as $actor){
-        ?>
-        <article class="row mt-4">
-          <div class="col-2 text-center">
-            <img src="../assets/images/<?php echo $actor->get_imagen();?>" alt="" class="w-100 rounded">
-            <h5>
-              <?php echo $actor->get_nombre()." ".$actor->get_apellido();?> 
-              <small>(<?php echo $actor->get_personaje();?>)</small>
-            </h5>
-          </div>
-          <div class="col-10">
-            <div class="row">
-              <div class="d-flex">
-                <h5 class="me-3">Edad: <?php echo $actor->get_edad();?></h5>
-                <h5 class="me-3">Temporadas: <?php echo $actor->get_numeroTemporadas();?></h5>
-                <h5 class="me-3">Genero: <?php echo $actor->get_genero();?></h5>
-                <h5 class="me-3">Rol: <?php echo $actor->get_rol();?></h5>
-              </div>
-              <p class="col-12"><?php echo $actor->get_descripcion();?></p>
-            </div>
-          </div>
-        </article>
+    <section class="container text-light my-4">
+        <h2>Agregar Personaje</h2>
+        <?php if (isset($_GET['mensaje'])) { ?>
+            <div class="w-100 border rounded p-3"><?php echo $_GET['mensaje']?></div>
         <?php } ?>
+        <form action="../controllers/procesar-crear-personaje.php" class="row g-3 my-4 mb-5" method="POST" enctype="multipart/form-data">
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre">
+            </div>
+            <div class="col-md-6">
+                <label for="apellido" class="form-label">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido">
+            </div>
+            <div class="col-md-6">
+                <label for="edad" class="form-label">Edad:</label>
+                <input type="text" class="form-control" id="edad" name="edad">
+            </div>
+            <div class="col-md-6">
+                <label for="genero" class="form-label">Genero:</label>
+                <input type="text" class="form-control" id="genero" name="genero">
+            </div>
+            <div class="col-md-6">
+                <label for="temporadas" class="form-label">Temporadas:</label>
+                <input type="text" class="form-control" id="temporadas" name="temporadas">
+            </div>
+            <div class="col-md-6">
+                <label for="personaje" class="form-label">Personaje:</label>
+                <input type="text" class="form-control" id="personaje" name="personaje">
+            </div>
+            <div class="col-md-6">
+                <label for="rol" class="form-label">Rol:</label>
+                <input type="text" class="form-control" id="rol" name="rol">
+            </div>
+            <div class="col-md-6">
+                <label for="imagen" class="form-label">Imagen:</label>
+                <input type="file" class="form-control" id="imagen" name="imagen">
+            </div>
+            <div class="col-12">
+                <label for="descripcion" class="form-label">Descripción:</label>
+                <textarea name="descripcion" id="descripcion" class="col-12" cols="20" rows="5"></textarea>
+            </div>
+            <div class="col-12 mb-4">
+                <button type="submit" class="btn btn-secondary">Agregar</button>
+            </div>
+        </form>
     </section>
-    <footer class="container-fluid text-light bg-dark py-2">
+    <footer class="container-fluid text-light bg-dark py-2 fixed-bottom mt-4">
         <div class="row">
             <p class="col-12 text-center">desarrollado por: Sebastian Pabon Lopez</p>
         </div>

@@ -73,15 +73,20 @@
             return $this->imagen;
         }
 
-        //Atributo para obtener todos los actores
+        /*
+        * Atributo para obtener todos los mounstros
+        */
         public function obtener_todos(){
             $items = [];
             try{
+                //Creamos la consulta para traer todos los mounstros
                 $consulta = 'SELECT * FROM mounstros';
 
+                //Generar una coneccion a la base de datos y ejecutar la consulta
                 $this->connectToDB();
                 $datos = mysqli_query($this->get_connection(), $consulta);
                 if ($datos) {
+                    //Recorre el resultado de la base de datos y crea un arreglo de objetos que contiene todos los mounstros
                     while ($fila = mysqli_fetch_array($datos)) {
                         $item = new Mounstro();
                         $item->id = $fila['id'];

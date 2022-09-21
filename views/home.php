@@ -78,9 +78,8 @@
     <section class="container text-light">
         <article class="row my-4">
             <h3 class="col-12">PROYECTO</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta accusamus impedit alias non, nam culpa in ab dolores blanditiis, debitis enim unde repellat quidem animi consectetur, magni id expedita minus?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta accusamus impedit alias non, nam culpa in ab dolores blanditiis, debitis enim unde repellat quidem animi consectetur, magni id expedita minus?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta accusamus impedit alias non, nam culpa in ab dolores blanditiis, debitis enim unde repellat quidem animi consectetur, magni id expedita minus?</p>
+            <p>Este proyecto pretende realizar el desarrollo de una aplicación que permitirá mostrar la información de los protagonistas de la serie de Netflix Stranger Things con el fin de dar a conocer a los fans una recopilación de todos los que forman parte de dicha serie. Para el desarrollo de este proyecto se crea un modelo que nos permite conocer la arquitectura de nuestro proyecto y guiándonos por esta misma, se realiza la instalación y configuración de nuestro servidor usando una maquina virtual manejada con el sistema operativo Linux Ubuntu. Una vez configurada la maquina virtual se realiza la instalación de MySQL y PHP MyAdmin para poder realizar el manejo de nuestra base de datos.</p>
+            <img src="./assets/images/fondo2.jpg" alt="">
         </article>
     </section>
     <footer class="container-fluid text-light bg-dark py-2">

@@ -1,9 +1,15 @@
 <?php
+
+    /**
+    * La clase Usuario contiene toda la información relacionada al usuario
+    */
     class Usuario{
+        //Propiedades de la clase usuario
         public $id, $nombre, $apellido, $correo, $rol;
 
         function __construct(){}
 
+        //Permite modificar y obtener el id
         function set_id($id) {
             $this->id = $id;
         }
@@ -12,6 +18,7 @@
             return $this->id;
         }
         
+        //Permite modificar y obtener el nombre
         function set_nombre($nombre) {
             $this->nombre = $nombre;
         }
@@ -20,6 +27,7 @@
             return $this->nombre;
         }
 
+        //Permite modificar y obtener el apellido
         function set_apellido($apellido) {
             $this->apellido = $apellido;
         }
@@ -28,6 +36,7 @@
             return $this->apellido;
         }
 
+        //Permite modificar y obtener el correo
         function set_correo($correo) {
             $this->correo = $correo;
         }
@@ -36,6 +45,7 @@
             return $this->correo;
         }
 
+        //Permite modificar y obtener el rol
         function set_rol($rol) {
             $this->rol = $rol;
         }

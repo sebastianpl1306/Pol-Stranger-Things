@@ -39,7 +39,7 @@ CREATE TABLE usuarios(
 INSERT INTO usuarios(nombre, apellido, correo, clave, rol) VALUES(
     'Sebastian',
     'Pabon Lopez',
-    'pabonlopezsebastian@gmail.com',
+    'admin@gmail.com',
     '123',
     'ADMIN'
 );
