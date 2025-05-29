@@ -1,0 +1,16 @@
+{
+    "personajes": [
+        {
+            "nombre": "Millie Bobby Brown",
+            "personaje": "Eleven",
+            "serie": "Stranger Things",
+            "descripcion": "Una joven con habilidades psíquicas que escapa de un laboratorio secreto y se une a un grupo de amigos para enfrentar criaturas sobrenaturales.",
+            "imagen": "millie-bobby-brown.webp",
+            "cita": "Friends don't lie.",
+            "edad": 18,
+            "temporadas": 5,
+            "genero": "femenino",
+            "rol": "protagonista"
+        }
+    ]
+}

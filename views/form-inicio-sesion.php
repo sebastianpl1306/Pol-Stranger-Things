@@ -12,59 +12,29 @@
     <title>StrangerThings</title>
 </head>
 <body>
-    <header class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="personajes.php">Personajes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="mounstros.php">Mounstros</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Info Serie</a>
-                  </li>
-                </ul>
-                <form class="d-flex">
-                  <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "VISITANT" || $_SESSION["rol"] == "ADMIN")){?>
-                    <h6 class="text-light me-2"><?php echo $_SESSION["nombre"];?></h6>
-                    <a class="btn btn-light btn-sm" aria-current="page" href="controllers/cerrar_sesion.php?SID=<?php echo $_SESSION["idSession"];?>">SALIR</a>
-                  <?php }else{ ?>
-                    <a class="btn btn-primary me-2" aria-current="page" href="form-inicio-sesion.php">Iniciar Sesion</a>
-                    <a class="btn btn-primary" aria-current="page" href="form-registro.php">Registrarme</a>
-                  <?php } ?>
-                </form>
+    <?php include_once './partials/header.php'; ?>
+    <section class="text-light py-2 container-auth">
+        <div class="container-form">
+          <h2 class="mb-4">Inicio de Sesión</h2>
+          <?php if (isset($_GET['mensaje'])) { ?>
+            <div class="w-100 border border border-danger rounded p-3 mb-2 text-red"><?php echo $_GET['mensaje']?></div>
+          <?php } ?>
+          <form action="../controllers/procesar-inicio-sesion.php" class="row g-3" method="POST">
+              <div class="col-12">
+                  <label for="correo" class="form-label">Correo:</label>
+                  <input type="email" class="form-control" id="correo" name="correo">
               </div>
-            </div>
-        </nav>
-    </header>
-    <section class="container text-light my-4 py-2">
-        <h2>Inicio de Sesion</h2>
-        <?php if (isset($_GET['mensaje'])) { ?>
-            <div class="w-100 border rounded p-3 my-3"><?php echo $_GET['mensaje']?></div>
-        <?php } ?>
-        <form action="../controllers/procesar-inicio-sesion.php" class="row g-3" method="POST">
-            <div class="col-12">
-                <label for="correo" class="form-label">Correo:</label>
-                <input type="email" class="form-control" id="correo" name="correo">
-            </div>
-            <div class="col-12">
-                <label for="clave" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="clave" name="clave">
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-secondary">Ingresar</button>
-            </div>
-        </form>
+              <div class="col-12">
+                  <label for="clave" class="form-label">Contraseña:</label>
+                  <input type="password" class="form-control" id="clave" name="clave">
+              </div>
+              <a href="">¿olvidaste la contraseña?</a>
+              <div class="col-12 d-flex justify-content-center flex-column">
+                  <button type="submit" class="btn btn-success btn-lg">Iniciar sesión</button>
+                  <a href="form-registro.php" class="text-center mt-4">¿No tienes una cuenta? Regístrate</a>
+              </div>
+          </form>
+        </div>
     </section>
     <footer class="container-fluid text-light bg-dark py-2 fixed-bottom">
         <div class="row">

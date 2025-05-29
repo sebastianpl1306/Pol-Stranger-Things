@@ -1,8 +1,11 @@
 :root {
+    --color-black: #0b0c10d3;
     --color-green: #073e1e;
     --color-blue: #3a5fe5;
-    --color-red: #ff1515;
-    --color-brown: #1e0707;
+    --color-red: #FF003C;
+    --color-white: #F5F5F5;
+    --color-gray: #2C2F33;
+    --color-brown: #8E1616;
     --color-dark-blue: #1e193c;
     --fuente-titulos: "BenguiatStd-Bold";
     --fuente-parrafos: Arial;
@@ -12,4 +15,52 @@
     font-family: BenguiatStd-Bold;
     font-style: hollow;
     src: url(../fonts/BenguiatStd-Bold.otf);
+}
+
+.text-black {
+    color: var(--color-black);
+}
+
+.bg-black {
+    background-color: var(--color-black);
+}
+
+.text-gray {
+    color: var(--color-gray);
+}
+
+.text-brown {
+    color: var(--color-brown);
+}
+
+.bg-brown {
+    background-color: var(--color-brown);
+}
+
+.text-green {
+    color: var(--color-green);
+}
+
+.bg-green {
+    background-color: var(--color-green);
+}
+
+.text-blue {
+    color: var(--color-blue);
+}
+
+.bg-blue {
+    background-color: var(--color-blue);
+}
+
+.text-red {
+    color: var(--color-red);
+}
+
+.bg-red {
+    background-color: var(--color-red);
+}
+
+.font-titulos {
+    font-family: var(--fuente-titulos);
 }

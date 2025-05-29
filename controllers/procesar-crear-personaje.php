@@ -4,7 +4,7 @@
     /**
     * Permite registrar a un nuevo usuario en la base de datos
     */
-    class ProcesarCrearPersonaje extends Conneccion{
+    class ProcesarCrearPersonaje extends Connection{
         function __construct(){
             $this->crear();
         }

@@ -6,7 +6,7 @@
     * La clase Actor contiene toda la información relacionada con los actores y sus papeles en la serie
     * Este clase Hereda de Conneccion que permite realizar la conexión con base de datos
     */
-    class Actor extends Conneccion{
+    class Actor extends Connection{
         //Propiedades de la clase actor
         public $id, $nombre, $apellido, $edad, $genero, $numeroTemporadas, $personaje, $rol, $imagen, $descripcion;
 
@@ -136,6 +136,43 @@
                 return $items;
             }catch(PDOException $e){
                 return [];
+            }
+        }
+
+        public function obtener_actor_por_id($id){
+            $item = new Actor();
+            try{
+                //Creamos la consulta para traer un actor por id
+                $consulta = 'SELECT * FROM actores WHERE id = ?';
+
+                //Generar una coneccion a la base de datos y ejecutar la consulta
+                $this->connectToDB();
+                $stmt = mysqli_prepare($this->get_connection(), $consulta);
+                mysqli_stmt_bind_param($stmt, 'i', $id);
+                mysqli_stmt_execute($stmt);
+                $datos = mysqli_stmt_get_result($stmt);
+
+                if ($datos) {
+                    $fila = mysqli_fetch_array($datos);
+                    if ($fila) {
+                        $item->set_id($fila['id']);
+                        $item->set_nombre($fila['nombre']);
+                        $item->set_apellido($fila['apellido']);
+                        $item->set_edad($fila['edad']);
+                        $item->set_genero($fila['genero']);
+                        $item->set_numeroTemporadas($fila['temporadas']);
+                        $item->set_personaje($fila['personaje']);
+                        $item->set_rol($fila['rol']);
+                        $item->set_imagen($fila['imagen']);
+                        $item->set_descripcion($fila['descripcion']);
+                    }
+                }else{
+                    echo "ha ocurrido un problema";
+                }
+
+                return $item;
+            }catch(PDOException $e){
+                return null;
             }
         }
     }

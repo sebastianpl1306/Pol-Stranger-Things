@@ -1,6 +1,17 @@
 CREATE DATABASE strangerThings;
 USE strangerthings;
 
+CREATE TABLE temporadas(
+    id int auto_increment not null,
+    numero int not null,
+    titulo varchar(30) not null,
+    fecha_lanzamiento date not null,
+    episodios int not null,
+    imagen varchar(30),
+    descripcion TEXT,
+    primary key(id)
+);
+
 CREATE TABLE actores(
 	id int auto_increment not null,
     nombre varchar(30) not null,
@@ -15,14 +26,45 @@ CREATE TABLE actores(
     primary key(id)
 );
 
-CREATE TABLE mounstros(
+CREATE TABLE monstruos(
     id int auto_increment not null,
     nombre varchar(50) not null,
     debilidad varchar(50) not null,
     aparicion int not null,
-    armas varchar(50),
+    armas TEXT,
     descripcion TEXT,
     imagen varchar(30),
+    first_appearance_season_id int not null,
+    foreign key(first_appearance_season_id) references temporadas(id),
+    primary key(id)
+);
+
+CREATE TABLE datos_curiosos(
+    id int auto_increment not null,
+    titulo varchar(50) not null,
+    descripcion TEXT,
+    imagen varchar(30),
+    temporada_id int not null,
+    foreign key(temporada_id) references temporadas(id),
+    primary key(id)
+);
+
+CREATE TABLE personaje_temporada(
+    id int auto_increment not null,
+    personaje varchar(30) not null,
+    temporada_id int not null,
+    actor_id int not null,
+    foreign key(temporada_id) references temporadas(id),
+    foreign key(actor_id) references actores(id),
+    primary key(id)
+);
+
+CREATE TABLE monstruo_temporada(
+    id int auto_increment not null,
+    monstruo_id int not null,
+    temporada_id int not null,
+    foreign key(monstruo_id) references monstruos(id),
+    foreign key(temporada_id) references temporadas(id),
     primary key(id)
 );
 
@@ -33,6 +75,19 @@ CREATE TABLE usuarios(
     correo varchar(50) not null,
     clave varchar(50) not null,
     rol varchar(50) not null,
+    primary key(id)
+);
+
+CREATE TABLE favoritos(
+    id int auto_increment not null,
+    usuario_id int not null,
+    temporada_id int not null,
+    actor_id int not null,
+    monstruo_id int not null,
+    foreign key(usuario_id) references usuarios(id),
+    foreign key(temporada_id) references temporadas(id),
+    foreign key(actor_id) references actores(id),
+    foreign key(monstruo_id) references monstruos(id),
     primary key(id)
 );
 
@@ -90,7 +145,7 @@ actores (
 );
 
 INSERT INTO
-mounstros(
+monstruos(
     nombre,
     debilidad,
     aparicion,
@@ -105,3 +160,10 @@ mounstros(
     'El monstruo (apodado el Demogorgon por Mike y sus amigos) era una criatura humanoide depredadora que vivía en la dimensión paralela conocida como el Mundo del Revés.',
     'demogorgon.jpg'
 );
+
+INSERT INTO temporadas (numero, titulo, fecha_lanzamiento, episodios, imagen, descripcion) VALUES
+(1, 'Stranger Things', '2016-07-15', 8, 'stranger_things_s1.jpg', 'La desaparición de un niño desencadena una serie de eventos sobrenaturales en Hawkins, Indiana, incluyendo la aparición de una niña con habilidades psíquicas.'),
+(2, 'Stranger Things 2', '2017-10-27', 9, 'stranger_things_s2.jpg', 'Un año después del regreso de Will, una nueva amenaza del Upside Down emerge, mientras los personajes lidian con las secuelas de los eventos anteriores.'),
+(3, 'Stranger Things 3', '2019-07-04', 8, 'stranger_things_s3.jpg', 'Durante el verano de 1985, el grupo enfrenta nuevas amenazas mientras disfrutan de su adolescencia y descubren secretos oscuros en Hawkins.'),
+(4, 'Stranger Things 4', '2022-05-27', 9, 'stranger_things_s4.jpg', 'La historia se expande más allá de Hawkins, revelando orígenes del Upside Down y enfrentando a los personajes con nuevos horrores.'),
+(5, 'Stranger Things 5', '2025-10-01', 8, 'stranger_things_s5.jpg', 'La temporada final promete cerrar las historias de los personajes mientras enfrentan la batalla definitiva contra las fuerzas del Upside Down.');

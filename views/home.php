@@ -15,55 +15,28 @@
     <title>StrangerThings</title>
 </head>
 <body>
-    <header class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="./">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="views/personajes.php">Personajes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="views/mounstros.php">Mounstros</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Info Serie</a>
-                  </li>
-                </ul>
-                <form class="d-flex">
-                  <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "VISITANT" || $_SESSION["rol"] == "ADMIN")){?>
-                    <h6 class="text-light me-2"><?php echo $_SESSION["nombre"];?></h6>
-                    <a class="btn btn-light btn-sm" aria-current="page" href="controllers/cerrar_sesion.php?SID=<?php echo $_SESSION["idSession"];?>">SALIR</a>
-                  <?php }else{ ?>
-                    <a class="btn btn-primary me-2" aria-current="page" href="views/form-inicio-sesion.php">Iniciar Sesion</a>
-                    <a class="btn btn-primary" aria-current="page" href="views/form-registro.php">Registrarme</a>
-                  <?php } ?>
-                </form>
-              </div>
-            </div>
-        </nav>
-    </header>
+    <?php include_once './views/partials/header.php'; ?>
     <main class="container-fluid container-image-main d-flex justify-content-center">
-        <div class="row text-center align-self-center">
-            <h1 class="">STRANGER <br>THINGS</h1><br>
-            <h2 class="text-light">INICIO</h2>
-        </div>
+      <video src="https://occ-0-2612-3933.1.nflxso.net/so/soa6/420/1834751395176401921.mp4?v=1&amp;e=1748429250&amp;t=Upe3eGdm0Xrs8KenfjfEUv4T1jE" class="default-ltr-cache-1uvi23e" autoplay muted playsinline></video>
+      <div class="row text-center align-self-center content-main">
+        <h1 class="">STRANGER <br>THINGS</h1><br>
+        <p class="text-white">Encuentra toda la información relacionada a la serie de Netflix Stranger Things</p>
+      </div>
     </main>
-    <section class="container text-light">
+    <section class="container">
         <article class="row mt-4">
-            <h3 class="col-12">STRANGER THINGS</h3>
-            <div class="col-4">
-                <img src="./assets/images/fondo.jpg" alt="" class="w-100">
-            </div>
-            <div class="col-7">
-                <p>Stranger Things es una serie de televisión web estadounidense de suspenso y ciencia ficción coproducida y distribuida por Netflix.Escrita y dirigida por los hermanos Matt y Ross Duffer, y producida ejecutivamente por Shawn Levy,se estrenó en la plataforma Netflix el 15 de julio de 2016. La serie recibió críticas positivas por parte de la prensa especializada, que elogió la interpretación, caracterización, ritmo, atmósfera y el claro homenaje al Hollywood de la década de los ochenta, con referencias a películas de Steven Spielberg,Wes Craven, John Carpenter, Stephen King, Rob Reiner y George Lucas, entre otros, incluyendo varias películas, anime y videojuegos.</p><a href="https://es.wikipedia.org/wiki/Stranger_Things">ver mas info</a>
+          <div class="col-4">
+            <img src="./assets/images/fondo.jpg" alt="" class="w-100 rounded">
+          </div>
+          <div class="col-7">
+              <h3 class="col-12 text-white">STRANGER THINGS</h3>
+              <div>
+                <span class="badge rounded-pill bg-dark">2022</span>
+                <span class="badge rounded-pill bg-dark">4 Temporadas</span>
+                <span class="badge rounded-pill bg-dark">16+</span>
+                <span class="badge rounded-pill bg-dark">Sci-fi</span>
+              </div>
+              <p>Stranger Things es una serie de televisión web estadounidense de suspenso y ciencia ficción coproducida y distribuida por Netflix.Escrita y dirigida por los hermanos Matt y Ross Duffer, y producida ejecutivamente por Shawn Levy,se estrenó en la plataforma Netflix el 15 de julio de 2016. La serie recibió críticas positivas por parte de la prensa especializada, que elogió la interpretación, caracterización, ritmo, atmósfera y el claro homenaje al Hollywood de la década de los ochenta, con referencias a películas de Steven Spielberg,Wes Craven, John Carpenter, Stephen King, Rob Reiner y George Lucas, entre otros, incluyendo varias películas, anime y videojuegos.</p><a href="https://es.wikipedia.org/wiki/Stranger_Things">ver mas info</a>
             </div>
         </article>
     </section>
@@ -75,7 +48,7 @@
             </div>
         </article>
     </section>
-    <section class="container text-light">
+    <section class="container">
         <article class="row my-4">
             <h3 class="col-12">PROYECTO</h3>
             <p>Este proyecto pretende realizar el desarrollo de una aplicación que permitirá mostrar la información de los protagonistas de la serie de Netflix Stranger Things con el fin de dar a conocer a los fans una recopilación de todos los que forman parte de dicha serie. Para el desarrollo de este proyecto se crea un modelo que nos permite conocer la arquitectura de nuestro proyecto y guiándonos por esta misma, se realiza la instalación y configuración de nuestro servidor usando una maquina virtual manejada con el sistema operativo Linux Ubuntu. Una vez configurada la maquina virtual se realiza la instalación de MySQL y PHP MyAdmin para poder realizar el manejo de nuestra base de datos.</p>

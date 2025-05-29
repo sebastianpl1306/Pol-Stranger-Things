@@ -12,77 +12,48 @@
     <title>StrangerThings</title>
 </head>
 <body>
-    <header class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="../">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="personajes.php">Personajes</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="personajes.php">Mounstros</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Info Serie</a>
-                  </li>
-                </ul>
-                <form class="d-flex">
-                  <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "VISITANT" || $_SESSION["rol"] == "ADMIN")){?>
-                    <h6 class="text-light me-2"><?php echo $_SESSION["nombre"];?></h6>
-                    <a class="btn btn-light btn-sm" aria-current="page" href="controllers/cerrar_sesion.php?SID=<?php echo $_SESSION["idSession"];?>">SALIR</a>
-                  <?php }else{ ?>
-                    <a class="btn btn-primary me-2" aria-current="page" href="form-inicio-sesion.php">Iniciar Sesion</a>
-                    <a class="btn btn-primary" aria-current="page" href="form-registro.php">Registrarme</a>
-                  <?php } ?>
-                </form>
+    <?php include_once './partials/header.php'; ?>
+    <section class="text-light py-2 container-auth">
+        
+        <div class="container-form">
+          <h2 class="mb-4">Registro</h2>
+          <?php if (isset($_GET['mensaje'])) { ?>
+            <div class="w-100 border border border-danger rounded p-3 mb-2 text-red"><?php echo $_GET['mensaje']?></div>
+          <?php } ?>
+          <form action="../controllers/procesar_registro.php" class="row g-3" method="POST">
+              <div class="col-md-6">
+                  <label for="nombre" class="form-label">Nombres:</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre">
               </div>
-            </div>
-        </nav>
-    </header>
-    <section class="container text-light my-4">
-        <h2>Registro</h2>
-        <?php if (isset($_GET['mensaje'])) { ?>
-            <div class="w-100 border rounded p-3"><?php echo $_GET['mensaje']?></div>
-        <?php } ?>
-        <form action="../controllers/procesar_registro.php" class="row g-3 my-4" method="POST">
-            <div class="col-md-6">
-                <label for="nombre" class="form-label">Nombres:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre">
-            </div>
-            <div class="col-md-6">
-                <label for="apellido" class="form-label">Apellidos:</label>
-                <input type="text" class="form-control" id="apellido" name="apellido">
-            </div>
-            <div class="col-12">
-                <label for="correo" class="form-label">Correo</label>
-                <input type="email" class="form-control" id="correo" name="correo">
-            </div>
-            <div class="col-md-6">
-                <label for="clave" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="clave" name="clave">
-            </div>
-            <div class="col-md-6">
-                <label for="confirmar" class="form-label">Confirmar Contraseña:</label>
-                <input type="password" class="form-control" id="confirmar" name="confirmar">
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-secondary">Registrarme</button>
-            </div>
-        </form>
+              <div class="col-md-6">
+                  <label for="apellido" class="form-label">Apellidos:</label>
+                  <input type="text" class="form-control" id="apellido" name="apellido">
+              </div>
+              <div class="col-12">
+                  <label for="correo" class="form-label">Correo</label>
+                  <input type="email" class="form-control" id="correo" name="correo">
+              </div>
+              <div class="col-md-6">
+                  <label for="clave" class="form-label">Contraseña:</label>
+                  <input type="password" class="form-control" id="clave" name="clave">
+              </div>
+              <div class="col-md-6">
+                  <label for="confirmar" class="form-label">Confirmar Contraseña:</label>
+                  <input type="password" class="form-control" id="confirmar" name="confirmar">
+              </div>
+              <div class="col-12 d-flex justify-content-center flex-column">
+                  <button type="submit" class="btn btn-success" onclick="return validar(this.form)">Registrarme</button>
+                  <a href="form-inicio-sesion.php" class="text-center mt-4">Ya tienes una cuenta?</a>
+              </div>
+          </form>
+        </div>
     </section>
     <footer class="container-fluid text-light bg-dark py-2 fixed-bottom">
         <div class="row">
             <p class="col-12 text-center">desarrollado por: Sebastian Pabon Lopez</p>
         </div>
     </footer>
+    <script src="../assets/js/validarRegistro.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>

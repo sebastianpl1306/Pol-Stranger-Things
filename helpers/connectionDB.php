@@ -2,7 +2,7 @@
 /**
 * La clase connneccion permite al usuario conectarse a la base de datos
 */
-class Conneccion{
+class Connection{
     public $connection;
 
     //Permite cambiar o obtener la conección
@@ -16,11 +16,11 @@ class Conneccion{
 
     //Permite conectarse con la base de datos y guardar la conección
     function connectToDB(){
-        $this->set_connection(mysqli_connect("localhost","root","12345","strangerthings"));
+        $this->set_connection(mysqli_connect("localhost","root","123456789","strangerthings"));
         if (!$this->get_connection()) {
-            echo "Conneccion erronea";
+            // echo "Conneccion erronea";
         }else{
-            echo "Conneccion establecida";
+            // echo "Conneccion establecida";
         }
     }
 }

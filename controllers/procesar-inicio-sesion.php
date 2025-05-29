@@ -5,7 +5,7 @@
     /**
     * Permite procesar el formulario de inicio de sesión
     */
-    class ProcesarInicioSesion extends Conneccion{
+    class ProcesarInicioSesion extends Connection{
         //Permite ejecutar la función de inicio de sesion
         function __construct(){
             $this->iniciar_sesion();
@@ -23,7 +23,7 @@
                     $clave = $_POST["clave"];
 
                     if (!$correo || !$clave) {
-                        header('Location: '."../views/form-inicio-sesion.php"."?mensaje=Ocurrio un problema");
+                        header('Location: '."../views/form-inicio-sesion.php"."?mensaje=Ocurrió un problema");
                     }else{
                         $items = [];
 
