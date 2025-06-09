@@ -18,11 +18,11 @@
     <?php include_once './partials/header.php'; ?>
     <div class="shadow-sm py-2 mb-4 bg-black">
       <nav class="container" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-        <h2 class="font-titulos text-red">Agregar Personaje</h2>
+        <h2 class="font-titulos text-red">Agregar monstruo</h2>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page"><a href="./personajes.php">Personajes</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Agregar personaje</li>
+          <li class="breadcrumb-item active" aria-current="page"><a href="./monstruos.php">Monstruos</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Agregar monstruo</li>
         </ol>
       </nav>
     </div>
@@ -30,42 +30,30 @@
         <?php if (isset($_GET['mensaje'])) { ?>
             <div class="w-100 border rounded p-3"><?php echo $_GET['mensaje']?></div>
         <?php } ?>
-        <form action="../controllers/procesar-crear-personaje.php" class="row g-3 my-4 mb-5" method="POST" enctype="multipart/form-data">
-            <div class="col-md-6">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre">
-            </div>
-            <div class="col-md-6">
-                <label for="apellido" class="form-label">Apellido:</label>
-                <input type="text" class="form-control" id="apellido" name="apellido">
-            </div>
-            <div class="col-md-6">
-                <label for="edad" class="form-label">Edad:</label>
-                <input type="text" class="form-control" id="edad" name="edad">
-            </div>
-            <div class="col-md-6">
-                <label for="genero" class="form-label">Genero:</label>
-                <input type="text" class="form-control" id="genero" name="genero">
-            </div>
-            <div class="col-md-6">
-                <label for="temporadas" class="form-label">Temporadas:</label>
-                <input type="text" class="form-control" id="temporadas" name="temporadas">
-            </div>
-            <div class="col-md-6">
-                <label for="personaje" class="form-label">Personaje:</label>
-                <input type="text" class="form-control" id="personaje" name="personaje">
-            </div>
-            <div class="col-md-6">
-                <label for="rol" class="form-label">Rol:</label>
-                <input type="text" class="form-control" id="rol" name="rol">
-            </div>
-            <div class="col-md-6">
-                <label for="imagen" class="form-label">Imagen:</label>
-                <input type="file" class="form-control" id="imagen" name="imagen">
+        <form action="../controllers/procesar-crear-monstruo.php" class="row g-3 my-4 mb-5" method="POST" enctype="multipart/form-data">
+            <div class="col-12">
+                <label for="nombreMonstruo" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombreMonstruo" name="nombreMonstruo">
             </div>
             <div class="col-12">
-                <label for="descripcion" class="form-label">Descripción:</label>
-                <textarea name="descripcion" id="descripcion" class="col-12" cols="20" rows="5"></textarea>
+                <label for="descripcionMonstruo" class="form-label">Descripción:</label>
+                <textarea name="descripcionMonstruo" id="descripcionMonstruo" class="col-12" cols="20" rows="5"></textarea>
+            </div>
+            <div class="col-12">
+                <label for="debilidad" class="form-label">Debilidad:</label>
+                <textarea name="debilidad" id="debilidad" class="col-12" cols="20" rows="5"></textarea>
+            </div>
+            <div class="col-12">
+                <label for="primeraAparicion" class="form-label">Primera Aparición:</label>
+                <input type="text" class="form-control" id="primeraAparicion" name="primeraAparicion">
+            </div>
+            <div class="col-12">
+                <label for="armas" class="form-label">Armas:</label>
+                <textarea name="armas" id="armas" class="col-12" cols="20" rows="5"></textarea>
+            </div>
+            <div class="col-12">
+                <label for="imagenMonstruo" class="form-label">Imagen:</label>
+                <input type="file" class="form-control" id="imagenMonstruo" name="imagenMonstruo">
             </div>
             <div class="col-12 mb-4">
                 <button type="submit" class="btn btn-secondary">Agregar</button>

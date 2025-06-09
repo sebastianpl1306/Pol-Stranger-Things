@@ -48,12 +48,19 @@
             <p><?php echo $monstruo->get_descripcion();?></p>
           </div>
         </article>
+        <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "ADMIN")){ ?>
+          <div class="row">
+            <article class="col-12 text-end mb-3">
+              <form action="../controllers/procesar-eliminar-monstruo.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este monstruo?');">
+                <input type="hidden" name="id" value="<?php echo $monstruo->get_id(); ?>">
+                <a href="./form-editar-monstruo.php?id=<?php echo $monstruo->get_id(); ?>" class="btn btn-warning">Editar</a>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+              </form>
+            </article>
+          </div>
+        <?php } ?>
     </section>
-    <footer class="container-fluid text-light bg-dark py-2">
-        <div class="row">
-            <p class="col-12 text-center">desarrollado por: Sebastian Pabon Lopez</p>
-        </div>
-    </footer>
+    <?php include_once './partials/footer.php'; ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
