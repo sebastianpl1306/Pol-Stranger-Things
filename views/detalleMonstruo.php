@@ -1,9 +1,17 @@
-
 <?php 
+    require_once __DIR__ . '/../class/Favorito.php';
     session_start();
 
     // Obtener el ID desde la URL
     $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+    if (isset($_SESSION["usuario_id"])) {
+      $favorito = new Favorito();
+      $favorito->setUsuarioId($_SESSION['usuario_id']);
+      $favorito->setMonstruoId($id);
+  
+      $existe = $favorito->existe();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,44 +35,63 @@
         </ol>
       </nav>
     </div>
+
     <section class="container h-screen bg-black p-4">
       <article class="row">
         <?php
           include_once __DIR__.'/../controllers/main.php';
           $controller = new Controller();
-
           $monstruo = $controller->mostrar_monstruo($id);
         ?>
-          <div class="col-5">
-            <img src="../assets/images/<?php echo $monstruo->get_imagen();?>" alt="" class="img-fluid rounded">
+        <div class="col-5">
+          <img src="../assets/images/<?php echo $monstruo->get_imagen();?>" alt="" class="img-fluid rounded">
+        </div>
+        <div class="col-7 p-4">
+          <h1 class="font-titulos text-red"><?php echo $monstruo->get_nombre(); ?></h1>
+          <div class="d-flex flex-column my-4">
+            <span><strong>Debilidad:</strong> <?php echo $monstruo->get_debilidad(); ?></span>
+            <span><strong>Armas:</strong> <?php echo $monstruo->get_armas(); ?></span>
           </div>
-          <div class="col-7 p-4">
-            <h1 class="font-titulos text-red"><?php echo $monstruo->get_nombre()?></h1>
-            <div class="d-flex flex-column my-4">
-              <span><strong>Debilidad:</strong> <?php echo $monstruo->get_debilidad();?></span>
-              <span><strong>Armas:</strong> <?php echo $monstruo->get_armas();?></span>
-            </div>
-            <p><strong>Descripción</strong></p>
-            <p><?php echo $monstruo->get_descripcion();?></p>
-          </div>
-        </article>
-        <?php if(isset($_SESSION["rol"]) && ($_SESSION["rol"] == "ADMIN")){ ?>
-          <div class="row">
-            <article class="col-12 text-end mb-3">
-              <form action="../controllers/procesar-eliminar-monstruo.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este monstruo?');">
-                <input type="hidden" name="id" value="<?php echo $monstruo->get_id(); ?>">
-                <a href="./form-editar-monstruo.php?id=<?php echo $monstruo->get_id(); ?>" class="btn btn-warning">Editar</a>
-                <button type="submit" class="btn btn-danger">Eliminar</button>
-              </form>
-            </article>
+          <p><strong>Descripción</strong></p>
+          <p><?php echo $monstruo->get_descripcion(); ?></p>
+        </div>
+      </article>
+
+      <div class="row justify-content-between">
+        <!-- Botón Añadir a favoritos (solo para usuarios registrados) -->
+        <?php if (isset($_SESSION["rol"])) { ?>
+          <div class="col-6 d-flex align-items-center">
+            <form action="../controllers/procesar-agregar-favorito.php" method="POST">
+              <input type="hidden" name="usuario_id" value="<?= $_SESSION['usuario_id'] ?>">
+              <input type="hidden" name="monstruo_id" value="<?php echo $monstruo->get_id(); ?>">
+              <button type="submit" class="btn btn-outline-warning">
+                <?= $existe ? '💔 Quitar de Favoritos' : '❤️ Agregar a Favoritos' ?>
+              </button>
+            </form>
           </div>
         <?php } ?>
+
+        <!-- Botones Editar/Eliminar (solo para admin) -->
+        <?php if(isset($_SESSION["rol"]) && $_SESSION["rol"] == "ADMIN") { ?>
+          <div class="col-6 text-end mb-3">
+            <form action="../controllers/procesar-eliminar-monstruo.php" method="POST" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este monstruo?');">
+              <input type="hidden" name="id" value="<?php echo $monstruo->get_id(); ?>">
+              <a href="./form-editar-monstruo.php?id=<?php echo $monstruo->get_id(); ?>" class="btn btn-warning">Editar</a>
+              <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+          </div>
+        <?php } ?>
+      </div>
     </section>
+
     <?php include_once './partials/footer.php'; ?>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../assets/js/obtenerPersonajes.js"></script>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

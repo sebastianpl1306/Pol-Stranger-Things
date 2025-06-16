@@ -50,10 +50,16 @@
                             if (count($items) != 1) {
                                 header('Location: '."../views/form-inicio-sesion.php"."?mensaje=Credenciales invalidas");
                             }else{
+                                if($items[0]->get_estado() == "Inactivo"){
+                                    header('Location: '."../views/form-inicio-sesion.php"."?mensaje=Usuario inactivo");
+                                    exit;
+                                }
+
                                 session_start();
 
                                 $identificator = session_id();
                                 $_SESSION["idSession"] = $identificator;
+                                $_SESSION["usuario_id"] = $item->get_id();
                                 $_SESSION["nombre"] = $item->get_nombre()." ".$item->get_apellido();
                                 $_SESSION["correo"] = $item->get_correo();
                                 $_SESSION["rol"] = $item->get_rol();

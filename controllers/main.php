@@ -3,7 +3,7 @@ include_once __DIR__."/../class/Actor.php";
 include_once __DIR__."/../class/Monstruo.php";
 include_once __DIR__."/../class/Temporada.php";
 include_once __DIR__."/../class/DatoCurioso.php";
-
+include_once __DIR__."/../class/Usuario.php";
 /**
 * La clase Controller permite mostrar los actores y mostrar los monstruos
 */
@@ -57,5 +57,9 @@ class Controller{
     public function mostrar_datos_curiosos(){
         $datoCurioso = new DatoCurioso();
         return $datoCurioso->obtener_todos();
+    }
+    public function mostrar_usuarios(){
+        $usuarios = new Usuario();
+        return $usuarios->obtener_todos();
     }
 }

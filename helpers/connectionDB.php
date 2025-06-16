@@ -16,7 +16,7 @@ class Connection{
 
     //Permite conectarse con la base de datos y guardar la conección
     function connectToDB(){
-        $this->set_connection(mysqli_connect("localhost","root","123456789","strangerthings"));
+        $this->set_connection(mysqli_connect("localhost","root","123456789","strangerthings",3306));
         if (!$this->get_connection()) {
             // echo "Conneccion erronea";
         }else{

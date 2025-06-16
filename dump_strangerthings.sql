@@ -75,15 +75,16 @@ CREATE TABLE usuarios(
     correo varchar(50) not null,
     clave varchar(50) not null,
     rol varchar(50) not null,
+    estado varchar(20) default 'activo',
     primary key(id)
 );
 
 CREATE TABLE favoritos(
     id int auto_increment not null,
-    usuario_id int not null,
-    temporada_id int not null,
-    actor_id int not null,
-    monstruo_id int not null,
+    usuario_id int null,
+    temporada_id int null,
+    actor_id int null,
+    monstruo_id int null,
     foreign key(usuario_id) references usuarios(id),
     foreign key(temporada_id) references temporadas(id),
     foreign key(actor_id) references actores(id),
@@ -96,7 +97,8 @@ INSERT INTO usuarios(nombre, apellido, correo, clave, rol) VALUES(
     'Pabon Lopez',
     'admin@gmail.com',
     '123',
-    'ADMIN'
+    'ADMIN',
+    'activo'
 );
 
 INSERT INTO 
